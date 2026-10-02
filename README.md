@@ -1,22 +1,20 @@
 <p align="center">
-  <img src="./assets/header.png" alt="Sales prospecting skill for Claude Code" width="100%">
+  <img src="./assets/lockup.png" width="880" alt="Sales prospecting skill for Claude Code. Sales prospecting builds the B2B prospect list you are willing to write to.">
 </p>
 
 # Sales prospecting skill for Claude Code
 
-**Sales prospecting builds the B2B prospect list you are willing to write to.** The scorer refuses a title-only list.
+Sales prospecting builds the B2B prospect list you are willing to write to.
 
-Who to contact is the person a signal puts on this week's list. The score is the slot: call, hold, or drop. A title with no signal does not earn a slot.
+Ops lead at Northwind posted a role for an outbound lead this week.
 
-[![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Skill-blue)](https://claude.ai/claude-code)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![No paid APIs](https://img.shields.io/badge/paid%20APIs-none-success)
+The good draft says call this week. A title-only list fails the score.
 
 <p align="center">
   <img src="./assets/demo.gif" alt="Sales prospecting skill — a signal earns a call, a title-only list fails" width="100%">
 </p>
 
-The build guide teaches a human. This pack teaches an agent.
+The build guide teaches a human. The pack teaches an agent.
 
 ## Install
 
@@ -24,7 +22,13 @@ The build guide teaches a human. This pack teaches an agent.
 npx skills add cmj-hub/claude-prospect-list --all -g --full-depth
 ```
 
-Installs into Claude Code, Cursor, Codex, Grok, Copilot, Windsurf, Cline, and OpenCode. The scorer is Python in this repo. It does not call a paid API, and it does not buy data.
+`--all` writes this pack for every host the installer knows. One host:
+
+```bash
+npx skills add cmj-hub/claude-prospect-list --skill '*' -g --full-depth -y -a claude-code
+```
+
+Swap `claude-code` for `cursor`, `codex`, `grok`, `github-copilot`, `windsurf`, `cline`, or `opencode`. The scorer is Python in this repo. It does not call a paid API, and it does not buy data.
 
 ## What you walk out with in 15 minutes
 
@@ -52,23 +56,21 @@ No. You bring the signal. The pack scores the slot: call, hold, or drop.
 - [Sales prospecting pack](https://jaymountconsulting.com/skills/claude-prospect-list) — this pack's page
 - [Skill packs catalog](https://jaymountconsulting.com/skills) — install paths + every pack
 
+## Free, no signup
+
+[All free tools](https://jaymountconsulting.com/prototypes)
+
 ## Free, by email
 
 [**Growth Audit**](https://jaymountconsulting.com/growth-audit) — architecture gaps in the GTM you already run. Free written report.
 
 [**Friday Signal**](https://jaymountconsulting.com/newsletter/signal) — one Friday GTM read. No pitch in it.
 
-## Companion packs
+## Next
 
-- [claude-psp](https://github.com/cmj-hub/claude-psp) — Ideal customer profile
-- [claude-evp](https://github.com/cmj-hub/claude-evp) — Value proposition
-- [claude-cold-email](https://github.com/cmj-hub/claude-cold-email) — Cold email
-- [claude-founder-brand](https://github.com/cmj-hub/claude-founder-brand) — LinkedIn posts
-- [claude-pricing](https://github.com/cmj-hub/claude-pricing) — Pricing strategy
-- [claude-landing-page](https://github.com/cmj-hub/claude-landing-page) — Landing page
-- [claude-geo](https://github.com/cmj-hub/claude-geo) — Generative engine optimization
-- [claude-sales-offer](https://github.com/cmj-hub/claude-sales-offer) — Sales offer
-- [claude-email-sequence](https://github.com/cmj-hub/claude-email-sequence) — Email sequence
+Previous: [Email sequence](https://github.com/cmj-hub/claude-email-sequence)
+
+Next: [GTM skills for Claude Code](https://github.com/cmj-hub/gtm-operator-skills)
 
 ## License
 
