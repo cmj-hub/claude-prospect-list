@@ -47,6 +47,17 @@ The people a public signal puts on this week's list. A job title with no signal 
 
 No. You bring the signal. The pack scores the slot: call, hold, or drop.
 
+## On the site
+
+- [Sales prospecting pack](https://jaymountconsulting.com/skills/claude-prospect-list) — this pack's page
+- [Skill packs catalog](https://jaymountconsulting.com/skills) — install paths + every pack
+
+## Free, by email
+
+[**Growth Audit**](https://jaymountconsulting.com/growth-audit) — architecture gaps in the GTM you already run. Free written report.
+
+[**Friday Signal**](https://jaymountconsulting.com/newsletter/signal) — one Friday GTM read. No pitch in it.
+
 ## Companion packs
 
 - [claude-psp](https://github.com/cmj-hub/claude-psp) — Ideal customer profile
