@@ -1,6 +1,6 @@
-# Who to contact
+# Sales prospecting
 
-You hold a list score from a signal. The scorer refuses a title-only list.
+Sales prospecting builds the B2B prospect list you are willing to write to. The scorer refuses a title-only list.
 
 Who to contact is the person a signal puts on this week's list. The score is the slot: call, hold, or drop. A title with no signal does not earn a slot.
 
@@ -11,7 +11,7 @@ Give the instrument. Sell the compounding.
 ## Install
 
 ```bash
-npx skills add cmj-hub/claude-list --all -g --full-depth
+npx skills add cmj-hub/claude-prospect-list --all -g --full-depth
 ```
 
 ## What you walk out with
