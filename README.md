@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="./assets/header.png" alt="Sales prospecting skill for Claude Code" width="100%">
+</p>
+
 # Sales prospecting skill for Claude Code
 
 **Sales prospecting builds the B2B prospect list you are willing to write to.** The scorer refuses a title-only list.
@@ -7,6 +11,10 @@ Who to contact is the person a signal puts on this week's list. The score is the
 [![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-Skill-blue)](https://claude.ai/claude-code)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 ![No paid APIs](https://img.shields.io/badge/paid%20APIs-none-success)
+
+<p align="center">
+  <img src="./assets/demo.gif" alt="Sales prospecting skill — a signal earns a call, a title-only list fails" width="100%">
+</p>
 
 The build guide teaches a human. This pack teaches an agent.
 
