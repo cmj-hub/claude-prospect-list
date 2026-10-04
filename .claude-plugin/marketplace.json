@@ -12,7 +12,8 @@
       "name": "prospect-list",
       "source": "./",
       "description": "Score who to contact this week from one public buying signal, and refuse a title-only list.",
-      "category": "sales"
+      "category": "sales",
+      "version": "0.3.0"
     }
   ]
 }

@@ -1,6 +1,7 @@
 ---
 name: who-to-contact
-description: "Score who to contact this week from one public buying signal, and refuse a title-only list. Use when building or checking a B2B prospect list, lead list, or call sheet; when asked who to call, email, or prioritize this week; or when a list has job titles but no signal behind them."
+description: "Score who to contact this week from one public buying signal, and refuse a title-only list. Use when building or checking a B2B prospect list, lead list, or call sheet; when asked who to call, email, or prioritize this week; or when a list has job titles but no signal behind them. Not for deliverability, dedup, or hygiene of an existing send list (use cold-email's cold-email-list-quality)."
+models: ""
 ---
 
 # Who to contact
@@ -36,6 +37,16 @@ Write one JSON object per person:
 
 A signal says what they did. A label says who they are. If you cannot point to where you saw it, it is not a signal yet.
 
+## Signals from brand-config.json
+
+If `brand-config.json` is at the project root, read it first.
+
+- `psp.signal_anchors` names the kinds of signal worth a slot. Look for those first. Each person's `signal` is one concrete, checkable instance of an anchor, not the anchor text itself.
+- `psp.primary_pain` is "the problem you solve" in the slot rules below.
+- `icp.role_targets` and `icp.exclusion_criteria`, when present, decide who belongs on the list at all. Leave excluded people off.
+
+A real signal that matches no anchor is `hold` at best. If there is no `psp` block, say the psp pack produces it (`/plugin install psp@gtm-operator-skills`, then `/psp:psp`) and ask the user for the signal. Never invent anchors.
+
 ## Picking the slot
 
 - `call this week`. The signal is fresh and points at the problem you solve.
@@ -54,17 +65,17 @@ Copy this list and tick it in order.
 
 - [ ] 1. Name the person in `title`.
 - [ ] 2. Write the `signal` and the `score` into `draft.json`.
-- [ ] 3. Run `python3 scripts/score.py --file draft.json`.
+- [ ] 3. Run `python3 ${CLAUDE_SKILL_DIR}/scripts/score.py --file draft.json`.
 
 Go back to step 2 if step 3 exits 1. Stop when it exits 0.
 
-Paths are relative to this skill's directory. Use `--stdin` to pipe the object instead of writing a file, and `--json` for a machine-readable result.
+The scorer runs from this skill's directory (`${CLAUDE_SKILL_DIR}`). Keep `draft.json` in a scratch directory, not the user's repo. Use `--stdin` to pipe the object instead of writing a file, and `--json` for a machine-readable result.
 
 ## Run
 
 ```bash
-python3 scripts/score.py --file examples/list-good.json
-python3 scripts/score.py --file examples/list-title.json
+python3 ${CLAUDE_SKILL_DIR}/scripts/score.py --file ${CLAUDE_SKILL_DIR}/examples/list-good.json
+python3 ${CLAUDE_SKILL_DIR}/scripts/score.py --file ${CLAUDE_SKILL_DIR}/examples/list-title.json
 ```
 
 | File | Exit | Why |
@@ -75,5 +86,17 @@ python3 scripts/score.py --file examples/list-title.json
 | `examples/list-persona.json` | 1 | A persona label in place of a signal. |
 
 Exit 2 means the input could not be read: missing file, not UTF-8, broken JSON, or not an object. A broken JSON does not echo the raw input.
+
+## Works with the suite
+
+This is step 3 of the GTM operator suite (`/plugin marketplace add cmj-hub/gtm-operator-skills`).
+
+- **Reads:** `psp.signal_anchors`, `psp.primary_pain`, and `icp` from `brand-config.json` if present.
+- **Writes:** nothing outside `draft.json`. Never touches `brand-config.json`.
+- **Before this:** psp (`/psp:psp`), when there is no `psp` block to say which signals count.
+- **After this:** cold-email (`/cold-email:cold-email`) for a signal-anchored first touch to each `call this week` person; sales-offer (`/sales-offer:cold-offer`) when the first touch should hand over a leak instead.
+- **Not this pack:** dedup or deliverability hygiene of a send list you already have is cold-email's `cold-email-list-quality`.
+
+If a companion pack is not installed, name it and its install line (`/plugin install <name>@gtm-operator-skills`); do not do its job inline.
 
 Python 3 standard library only. No network. No send.

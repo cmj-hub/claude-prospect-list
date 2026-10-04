@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.0 — 2026-10-04
+
+- SKILL.md reads `psp.signal_anchors`, `psp.primary_pain`, and `icp`
+  from a shared `brand-config.json` when present, and points to the psp
+  pack when it is missing.
+- New "Works with the suite" section. Description names what belongs
+  to cold-email's list hygiene.
+- Scorer and examples are called as `${CLAUDE_SKILL_DIR}/...`.
+- `models: ""` restored in frontmatter (house rule).
+- `marketplace.json` entry carries the version.
+
 ## 0.2.0
 
 - Ship as a Claude Code plugin: `.claude-plugin/plugin.json` and a

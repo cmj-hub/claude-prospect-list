@@ -1,6 +1,6 @@
 {
   "name": "prospect-list",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Score who to contact this week from one public buying signal, and refuse a title-only list. Deterministic, stdlib-only Python scorer. No network, no send.",
   "author": {
     "name": "Jay Mount Consulting",
@@ -9,5 +9,12 @@
   "homepage": "https://jaymountconsulting.com/skills/claude-prospect-list",
   "repository": "https://github.com/cmj-hub/claude-prospect-list",
   "license": "MIT",
-  "keywords": ["sales", "prospecting", "b2b", "lead-list", "gtm", "buying-signal"]
+  "keywords": [
+    "sales",
+    "prospecting",
+    "b2b",
+    "lead-list",
+    "gtm",
+    "buying-signal"
+  ]
 }
