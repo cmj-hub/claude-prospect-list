@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.0 — 2026-10-04
+
+- The draft lives at `gtm/list.json` (the suite's shared work folder), not a scratch `draft.json`.
+- Scorer: every refusal line reads `- what is wrong → what to change`; the last line names the next step (`Next: /cold-email:cold-email` on a pass). `--json` adds `fixes` (parallel to `reasons`) and `next`. `--input` is a hidden alias for `--file`. `--help` shows an example.
+- The missing-signal reason now says what to change.
+- `argument-hint` and `allowed-tools` (Read, Write, the scorer) in the skill; `/prospect-list:who-to-contact score` scores the existing draft.
+- Missing `icp`: the skill points to `/gtm:setup` instead of running its own interview.
+- README "In 60 seconds" block. Trigger evals under `evals/` and a manual `evals.yml` workflow. Version synced in `marketplace.json`.
+
+### Moved
+
+- `draft.json` → `gtm/list.json`. The skill and the command (`/prospect-list:who-to-contact`) are unchanged.
+
 ## 0.3.1 — 2026-10-04
 
 - Plugin icon: `.claude-plugin/icon.png`, set as `icon` in `plugin.json`.

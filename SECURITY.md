@@ -3,10 +3,10 @@
 ## What this pack does on your machine
 
 - One script runs locally: `skills/who-to-contact/scripts/score.py`, standard-library Python 3. No dependencies are installed.
-- It reads only the draft you hand it (`--file draft.json` or `--stdin`), or the bundled `examples/`.
+- It reads only the draft you hand it (`--file gtm/list.json` or `--stdin`), or the bundled `examples/`.
 - The skill reads `psp.signal_anchors`, `psp.primary_pain`, and `icp` from `brand-config.json` when it exists, and never writes to it.
-- The skill writes one `draft.json`, in a scratch directory rather than your repo. Nothing else on disk is changed.
-- Network: none. No script opens a network connection, and the skill pre-approves no web tool. You bring the signal; the pack does not look people up or buy data.
+- The skill writes one draft, `gtm/list.json`, in your project's shared `gtm/` work folder. Nothing else on disk is changed.
+- Network: none. No script opens a network connection, and the skill pre-approves no web tool (`allowed-tools` lists only Read, Write, and the scorer). You bring the signal; the pack does not look people up or buy data.
 - No telemetry. Nothing is logged or sent anywhere.
 - No credentials are asked for or stored.
 - Nothing is sent. The pack scores who to contact; it never emails, messages, or exports to a CRM.

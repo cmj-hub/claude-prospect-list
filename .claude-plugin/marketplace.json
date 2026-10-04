@@ -13,7 +13,7 @@
       "source": "./",
       "description": "Score who to contact this week from one public buying signal, and refuse a title-only list.",
       "category": "sales",
-      "version": "0.3.1"
+      "version": "0.4.0"
     }
   ]
 }

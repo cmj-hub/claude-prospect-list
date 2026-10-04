@@ -50,7 +50,7 @@ class ScoreList(unittest.TestCase):
         result = run(["--file", str(EXAMPLES / "list-title.json")])
         self.assertEqual(result.returncode, 1)
         self.assertIn("a title-only list", result.stdout)
-        self.assertIn("fix: missing signal", result.stdout)
+        self.assertIn("- missing signal (a title with no signal is a directory, not a list) \u2192 write one thing", result.stdout)
         self.assertNotIn("a list score from a signal", result.stdout)
 
     def test_persona_label_is_refused(self):
@@ -82,7 +82,7 @@ class ScoreList(unittest.TestCase):
         result = score({"signal": GOOD["signal"], "score": "hold"})
         self.assertEqual(result.returncode, 1)
         self.assertIn("not a list score", result.stdout)
-        self.assertIn("fix: missing title", result.stdout)
+        self.assertIn("- missing title \u2192 name the person", result.stdout)
         self.assertNotIn("a title-only list", result.stdout)
 
     def test_json_output(self):
@@ -131,6 +131,29 @@ class PluginLayout(unittest.TestCase):
         for path in EXAMPLES.glob("*.json"):
             with self.subTest(path=path.name):
                 self.assertIsInstance(json.loads(path.read_text()), dict)
+
+
+class CliConvention(unittest.TestCase):
+    def test_refusal_lines_say_what_to_change(self):
+        result = run(["--file", str(EXAMPLES / "list-title.json")])
+        self.assertEqual(result.returncode, 1)
+        lines = result.stdout.strip().splitlines()
+        for line in lines[1:-1]:
+            self.assertRegex(line, r"^- .+ \u2192 .+")
+        self.assertEqual(lines[-1], "Next: fix the lines above and run this again.")
+
+    def test_pass_names_next_step(self):
+        result = run(["--file", str(EXAMPLES / "list-good.json")])
+        self.assertEqual(result.stdout.strip().splitlines()[-1], "Next: /cold-email:cold-email")
+
+    def test_json_fixes_parallel_to_reasons(self):
+        payload = json.loads(run(["--file", str(EXAMPLES / "list-title.json"), "--json"]).stdout)
+        self.assertEqual(len(payload["fixes"]), len(payload["reasons"]))
+        self.assertIn("run this again", payload["next"])
+
+    def test_help_and_input_alias(self):
+        self.assertIn("examples/list-good.json", run(["--help"]).stdout)
+        self.assertEqual(run(["--input", str(EXAMPLES / "list-good.json")]).returncode, 0)
 
 
 if __name__ == "__main__":
