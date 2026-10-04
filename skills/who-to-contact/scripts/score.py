@@ -3,9 +3,12 @@
 
 Stdlib only. No network. Does not send.
 
-  python3 scripts/score.py --file draft.json
+  python3 scripts/score.py --file gtm/list.json
   python3 scripts/score.py --stdin
-  python3 scripts/score.py --file draft.json --json
+  python3 scripts/score.py --file gtm/list.json --json
+
+Each refusal line reads `- <what is wrong> -> <what to change>`; the last line
+names the next step.
 
 Exit codes: 0 scored, 1 refused (fix the draft), 2 unreadable input.
 """
@@ -136,7 +139,7 @@ def evaluate(data: dict) -> dict:
     if not title:
         reasons.append("missing title; name the person")
     if not signal:
-        reasons.append("missing signal; a title with no signal is a directory, not a list")
+        reasons.append("missing signal (a title with no signal is a directory, not a list); write one thing they did this window, or leave them off")
     else:
         reasons.extend(signal_problems(title, signal))
     if not raw_score:
@@ -161,20 +164,40 @@ def evaluate(data: dict) -> dict:
     }
 
 
+NEXT_PASS = "/cold-email:cold-email"
+NEXT_FAIL = "fix the lines above and run this again."
+EXAMPLE = (
+    "Exit 0 scored, 1 refused, 2 unreadable input.\n\n"
+    "example:\n  python3 scripts/score.py --file examples/list-good.json"
+)
+
+
+def split_reason(reason: str) -> tuple[str, str]:
+    """Each reason reads 'what is wrong; what to change'."""
+    wrong, _, fix = reason.partition("; ")
+    return wrong, fix or "fix this field"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Score who to contact from one buying signal.",
-        epilog="Exit 0 scored, 1 refused, 2 unreadable input.",
+        epilog=EXAMPLE,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument("--file", help="Path to a JSON object with title, signal, score")
+    parser.add_argument("--file", help="Path to a JSON object with title, signal, score (gtm/list.json)")
+    parser.add_argument("--input", dest="file", help=argparse.SUPPRESS)
     parser.add_argument("--stdin", action="store_true", help="Read the JSON object from stdin")
-    parser.add_argument("--json", action="store_true", help="Print the result as JSON")
+    parser.add_argument("--json", action="store_true", help="Print the result as one JSON object")
     args = parser.parse_args()
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(errors="replace")
     data = load_payload(args)
     if not isinstance(data, dict):
         fail_input("JSON must be an object")
 
     result = evaluate(data)
+    result["fixes"] = [split_reason(reason)[1] for reason in result["reasons"]]
+    result["next"] = NEXT_PASS if result["ok"] else NEXT_FAIL
 
     if args.json:
         print(json.dumps(result, indent=2))
@@ -185,7 +208,9 @@ def main() -> int:
             print(f"signal: {result['signal']}")
             print(f"score: {result['score']}")
         for reason in result["reasons"]:
-            print(f"fix: {reason}")
+            wrong, fix = split_reason(reason)
+            print(f"- {wrong} → {fix}")
+        print(f"Next: {result['next']}")
     return 0 if result["ok"] else 1
 
 

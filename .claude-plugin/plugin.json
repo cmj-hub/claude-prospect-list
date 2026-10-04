@@ -1,6 +1,6 @@
 {
   "name": "prospect-list",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Score who to contact this week from one public buying signal, and refuse a title-only list. Deterministic, stdlib-only Python scorer. No network, no send.",
   "author": {
     "name": "Jay Mount Consulting",

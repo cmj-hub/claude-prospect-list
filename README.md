@@ -6,6 +6,23 @@
 
 Sales prospecting builds the B2B prospect list you are willing to write to.
 
+## In 60 seconds
+
+```text
+/plugin marketplace add cmj-hub/gtm-operator-skills
+/plugin install prospect-list@gtm-operator-skills
+/prospect-list:who-to-contact
+```
+
+Or score the sample without an agent:
+
+```bash
+python3 skills/who-to-contact/scripts/score.py --file skills/who-to-contact/examples/list-good.json    # exit 0, prints title, signal, score, then "Next: /cold-email:cold-email"
+python3 skills/who-to-contact/scripts/score.py --file skills/who-to-contact/examples/list-title.json   # exit 1: - missing signal (a title with no signal is a directory, not a list) → write one thing they did this window, or leave them off
+```
+
+Part of the GTM operator suite — `/plugin install gtm@gtm-operator-skills` installs all ten.
+
 Ops lead at Northwind posted a role for an outbound lead this week.
 
 The good draft says call this week. A title-only list fails the score.
@@ -25,7 +42,7 @@ As a Claude Code plugin:
 /plugin install prospect-list@claude-prospect-list
 ```
 
-The skill then loads as `prospect-list:who-to-contact`. Ask Claude who to call this week, or hand it a list of titles.
+The skill then loads as `/prospect-list:who-to-contact`. Ask Claude who to call this week, or hand it a list of titles. `/prospect-list:who-to-contact score` scores the draft already in `gtm/list.json`.
 
 For every agent host the skills installer knows:
 
@@ -49,7 +66,7 @@ python3 scripts/score.py --file examples/list-good.json
 python3 scripts/score.py --file examples/list-title.json
 ```
 
-The good draft exits 0 and prints a list score from a signal. The title-only draft exits 1 and prints a `fix:` line for each gap. A persona label in place of a signal, or a score that is not `call this week`, `hold`, or `drop`, fails too. Add `--json` for a machine-readable result. Then drop in yours.
+The good draft exits 0 and prints a list score from a signal. The title-only draft exits 1 and prints one `- what is wrong → what to change` line for each gap, then `Next: fix the lines above and run this again.` A persona label in place of a signal, or a score that is not `call this week`, `hold`, or `drop`, fails too. Add `--json` for one result object (`fixes` and `next` included). Then drop in yours at `gtm/list.json` in your project.
 
 ## What's in the pack
 
@@ -89,7 +106,7 @@ No. You bring the signal. The pack scores the slot: call, hold, or drop.
 [**Friday Signal**](https://jaymountconsulting.com/newsletter/signal) — one Friday GTM read. No pitch in it.
 ## Privacy and security
 
-The scorer is standard-library Python and opens no network connection. It reads only the draft you give it; the skill reads `brand-config.json` and never writes to it. No telemetry, no credentials, no lookups, and nothing is sent. See [SECURITY.md](SECURITY.md).
+The scorer is standard-library Python and opens no network connection. It reads only the draft you give it; the skill writes `gtm/list.json`, reads `brand-config.json` and never writes to it. No telemetry, no credentials, no lookups, and nothing is sent. See [SECURITY.md](SECURITY.md).
 
 ## Next
 

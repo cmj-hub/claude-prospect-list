@@ -1,6 +1,8 @@
 ---
 name: who-to-contact
 description: "Score who to contact this week from one public buying signal, and refuse a title-only list. Use when building or checking a B2B prospect list, lead list, or call sheet; when asked who to call, email, or prioritize this week; or when a list has job titles but no signal behind them. Not for deliverability, dedup, or hygiene of an existing send list (use cold-email's cold-email-list-quality)."
+argument-hint: "[person, company, or signal | score]"
+allowed-tools: Read Write Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/score.py:*)
 models: ""
 ---
 
@@ -9,6 +11,10 @@ models: ""
 A list score names one person worth a slot this week, and the signal that put them there. A title with no signal is not a list. It is a directory of names.
 
 The build guide teaches a human. This pack teaches an agent.
+
+## Start
+
+If `$ARGUMENTS` is `score`, run the scorer on `gtm/list.json` and report each line. Otherwise `$ARGUMENTS` names a person, a company, or a signal, or is empty; work through the checklist below. The draft lives at `gtm/list.json`; create `gtm/` if missing.
 
 ## What you hold
 
@@ -45,6 +51,8 @@ If `brand-config.json` is at the project root, read it first.
 - `psp.primary_pain` is "the problem you solve" in the slot rules below.
 - `icp.role_targets` and `icp.exclusion_criteria`, when present, decide who belongs on the list at all. Leave excluded people off.
 
+If `icp` is missing, say "Run `/gtm:setup` once for the whole suite." If the gtm plugin is not installed, ask only the two shared questions inline (which roles you target, who you never contact), then go on. Do not run a longer ICP interview here.
+
 A real signal that matches no anchor is `hold` at best. If there is no `psp` block, say the psp pack produces it (`/plugin install psp@gtm-operator-skills`, then `/psp:psp`) and ask the user for the signal. Never invent anchors.
 
 ## Picking the slot
@@ -55,7 +63,7 @@ A real signal that matches no anchor is `hold` at best. If there is no `psp` blo
 
 ## Refusal
 
-The scorer refuses a title-only list. A title with no signal is the refusal. It also refuses a persona label in place of a signal, a signal that repeats the title, and a score that is not one of the three slots. Each refusal prints a `fix:` line. Do what it says and return to step 2.
+The scorer refuses a title-only list. A title with no signal is the refusal. It also refuses a persona label in place of a signal, a signal that repeats the title, and a score that is not one of the three slots. Each refusal prints one `- what is wrong → what to change` line, then `Next: fix the lines above and run this again.` Do what it says and return to step 2.
 
 Do not invent a signal to get past the refusal. If you have no signal for a person, leave them off the list and tell the user.
 
@@ -64,12 +72,12 @@ Do not invent a signal to get past the refusal. If you have no signal for a pers
 Copy this list and tick it in order.
 
 - [ ] 1. Name the person in `title`.
-- [ ] 2. Write the `signal` and the `score` into `draft.json`.
-- [ ] 3. Run `python3 ${CLAUDE_SKILL_DIR}/scripts/score.py --file draft.json`.
+- [ ] 2. Write the `title`, `signal`, and `score` into `gtm/list.json` (create `gtm/` if missing).
+- [ ] 3. Run `python3 ${CLAUDE_SKILL_DIR}/scripts/score.py --file gtm/list.json`.
 
-Go back to step 2 if step 3 exits 1. Stop when it exits 0.
+Go back to step 2 if step 3 exits 1. Stop when it exits 0; the last line is `Next: /cold-email:cold-email`. Say it to the user.
 
-The scorer runs from this skill's directory (`${CLAUDE_SKILL_DIR}`). Keep `draft.json` in a scratch directory, not the user's repo. Use `--stdin` to pipe the object instead of writing a file, and `--json` for a machine-readable result.
+The scorer runs from this skill's directory (`${CLAUDE_SKILL_DIR}`). Use `--stdin` to pipe the object instead of writing a file, and `--json` for one result object (`ok`, `verdict`, `reasons`, `fixes` parallel to `reasons`, `next`).
 
 ## Run
 
@@ -92,7 +100,7 @@ Exit 2 means the input could not be read: missing file, not UTF-8, broken JSON, 
 This is step 3 of the GTM operator suite (`/plugin marketplace add cmj-hub/gtm-operator-skills`).
 
 - **Reads:** `psp.signal_anchors`, `psp.primary_pain`, and `icp` from `brand-config.json` if present.
-- **Writes:** nothing outside `draft.json`. Never touches `brand-config.json`.
+- **Writes:** `gtm/list.json` only. Never touches `brand-config.json`.
 - **Before this:** psp (`/psp:psp`), when there is no `psp` block to say which signals count.
 - **After this:** cold-email (`/cold-email:cold-email`) for a signal-anchored first touch to each `call this week` person; sales-offer (`/sales-offer:cold-offer`) when the first touch should hand over a leak instead.
 - **Not this pack:** dedup or deliverability hygiene of a send list you already have is cold-email's `cold-email-list-quality`.

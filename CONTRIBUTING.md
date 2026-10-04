@@ -8,8 +8,9 @@ before you contribute.
 - **Bug reports** — open an issue with a reproducible case. The
   scripts in `scripts/` are deterministic, so bugs there are usually
   one-line fixes.
-- **New sub-skills** that extend the existing framework. Discuss in
-  an issue first if it's a substantial addition.
+- **New steps** that extend the existing framework, inside the one
+  skill at `skills/who-to-contact/SKILL.md` (the suite ships one skill
+  per pack). Discuss in an issue first if it's a substantial addition.
 - **Calibration improvements** to the scoring scripts — if you can
   show a case where the script scores wrong, that's gold.
 - **Cross-runtime ports** (Cursor, Gemini CLI, Codex) — see the
@@ -51,8 +52,8 @@ claude plugin validate --strict .   # if you have Claude Code
 - [ ] Sub-skill descriptions include trigger phrases inline
 - [ ] If you touch a script, add a test in `tests/` and paste a smoke-test
       run in the PR
-- [ ] New sub-skills live in `skills/<name>/SKILL.md` and are listed in
-      the README "What's in the pack" table
+- [ ] No new skills: new steps go in `skills/who-to-contact/SKILL.md`
+      (or a mode file it links) and in the README "What's in the pack" table
 - [ ] CHANGELOG.md updated
 - [ ] No new dependencies (any of: pip packages, npm packages, API
       keys, paid services)
