@@ -1,6 +1,6 @@
 {
   "name": "prospect-list",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Score who to contact this week from one public buying signal, and refuse a title-only list. Deterministic, stdlib-only Python scorer. No network, no send.",
   "author": {
     "name": "Jay Mount Consulting",
@@ -16,5 +16,8 @@
     "lead-list",
     "gtm",
     "buying-signal"
-  ]
+  ],
+  "documentationUrl": "https://github.com/cmj-hub/claude-prospect-list#readme",
+  "supportUrl": "https://github.com/cmj-hub/claude-prospect-list/issues",
+  "icon": ".claude-plugin/icon.png"
 }

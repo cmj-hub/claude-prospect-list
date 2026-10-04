@@ -58,7 +58,7 @@ The good draft exits 0 and prints a list score from a signal. The title-only dra
 | `skills/who-to-contact/SKILL.md` | The skill: what a signal is, how to pick the slot, the checklist. |
 | `skills/who-to-contact/scripts/score.py` | The scorer. Exit 0 scored, 1 refused, 2 unreadable input. |
 | `skills/who-to-contact/examples/` | Good, hold, title-only, and persona-label drafts. |
-| `.claude-plugin/` | Plugin and marketplace manifests for Claude Code. |
+| `.claude-plugin/` | Plugin and marketplace manifests for Claude Code, and the plugin icon. |
 | `tests/` | `python3 -m unittest discover -s tests` |
 
 ## What this pack will not do
@@ -87,6 +87,9 @@ No. You bring the signal. The pack scores the slot: call, hold, or drop.
 [**Growth Audit**](https://jaymountconsulting.com/growth-audit) — architecture gaps in the GTM you already run. Free written report.
 
 [**Friday Signal**](https://jaymountconsulting.com/newsletter/signal) — one Friday GTM read. No pitch in it.
+## Privacy and security
+
+The scorer is standard-library Python and opens no network connection. It reads only the draft you give it; the skill reads `brand-config.json` and never writes to it. No telemetry, no credentials, no lookups, and nothing is sent. See [SECURITY.md](SECURITY.md).
 
 ## Next
 

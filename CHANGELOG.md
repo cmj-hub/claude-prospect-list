@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1 — 2026-10-04
+
+- Plugin icon: `.claude-plugin/icon.png`, set as `icon` in `plugin.json`.
+- `SECURITY.md`: what runs locally, no network, how to report a vulnerability.
+- README privacy and security section.
+
 ## 0.3.0 — 2026-10-04
 
 - SKILL.md reads `psp.signal_anchors`, `psp.primary_pain`, and `icp`
