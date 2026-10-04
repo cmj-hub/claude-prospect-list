@@ -2,6 +2,7 @@
 type: tool_used
 tool: Skill
 input_match: '"skill"\s*:\s*"(?:[\w-]+:)?who-to-contact"'
+min: 0
 max: 0
 ---
 
