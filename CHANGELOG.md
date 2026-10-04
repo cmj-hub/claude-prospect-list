@@ -1,0 +1,26 @@
+# Changelog
+
+## 0.2.0
+
+- Ship as a Claude Code plugin: `.claude-plugin/plugin.json` and a
+  single-plugin `marketplace.json`, installable with
+  `/plugin marketplace add cmj-hub/claude-prospect-list`.
+- Move the skill to `skills/who-to-contact/` so the directory matches the
+  skill name and the scorer and examples travel with it.
+- Scorer refuses a persona label, a signal that repeats the title, a
+  signal under three words, and a score that is not `call this week`,
+  `hold`, or `drop`. `call` folds to `call this week`.
+- Every refusal prints a `fix:` line naming the gap. A missing title is
+  no longer reported as a title-only list.
+- `--json` prints a machine-readable result.
+- Exit codes are documented: 0 scored, 1 refused, 2 unreadable input.
+- SKILL.md: sharper trigger description, signal-vs-label table, slot
+  rubric, and a rule not to invent a signal to pass. Dropped the empty
+  `models` field.
+- New examples: `list-hold.json`, `list-persona.json`.
+- Tests cover the new refusals, JSON output, and plugin layout. CI runs
+  them on every push.
+
+## 0.1.0
+
+- First release: `who-to-contact` skill and `scripts/score.py`.

@@ -18,11 +18,22 @@ The build guide teaches a human. The pack teaches an agent.
 
 ## Install
 
+As a Claude Code plugin:
+
+```text
+/plugin marketplace add cmj-hub/claude-prospect-list
+/plugin install prospect-list@claude-prospect-list
+```
+
+The skill then loads as `prospect-list:who-to-contact`. Ask Claude who to call this week, or hand it a list of titles.
+
+For every agent host the skills installer knows:
+
 ```bash
 npx skills add cmj-hub/claude-prospect-list --all -g --full-depth
 ```
 
-`--all` writes this pack for every host the installer knows. One host:
+One host:
 
 ```bash
 npx skills add cmj-hub/claude-prospect-list --skill '*' -g --full-depth -y -a claude-code
@@ -33,11 +44,22 @@ Swap `claude-code` for `cursor`, `codex`, `grok`, `github-copilot`, `windsurf`, 
 ## What you walk out with in 15 minutes
 
 ```bash
+cd skills/who-to-contact
 python3 scripts/score.py --file examples/list-good.json
 python3 scripts/score.py --file examples/list-title.json
 ```
 
-The good draft exits 0 and prints a list score from a signal. The title-only draft exits 1. Then drop in yours.
+The good draft exits 0 and prints a list score from a signal. The title-only draft exits 1 and prints a `fix:` line for each gap. A persona label in place of a signal, or a score that is not `call this week`, `hold`, or `drop`, fails too. Add `--json` for a machine-readable result. Then drop in yours.
+
+## What's in the pack
+
+| Path | What it is |
+| --- | --- |
+| `skills/who-to-contact/SKILL.md` | The skill: what a signal is, how to pick the slot, the checklist. |
+| `skills/who-to-contact/scripts/score.py` | The scorer. Exit 0 scored, 1 refused, 2 unreadable input. |
+| `skills/who-to-contact/examples/` | Good, hold, title-only, and persona-label drafts. |
+| `.claude-plugin/` | Plugin and marketplace manifests for Claude Code. |
+| `tests/` | `python3 -m unittest discover -s tests` |
 
 ## What this pack will not do
 
