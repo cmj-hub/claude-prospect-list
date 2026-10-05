@@ -23,6 +23,8 @@ python3 skills/who-to-contact/scripts/score.py --file skills/who-to-contact/exam
 
 Part of the GTM operator suite — `/plugin install gtm@gtm-operator-skills` installs all ten.
 
+Add the [gtm-operator mod](https://github.com/cmj-hub/gtm-operator-claude-mod) to see the suite's next step above your prompt and keep `brand-config.json` from being overwritten: `/plugin install gtm-operator@gtm-operator-skills`.
+
 Ops lead at Northwind posted a role for an outbound lead this week.
 
 The good draft says call this week. A title-only list fails the score.
