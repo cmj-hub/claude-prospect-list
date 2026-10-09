@@ -84,6 +84,15 @@ The good draft exits 0 and prints a list score from a signal. The title-only dra
 
 It will not send the list. It does not buy data. It will not accept a title-only list.
 
+## The data step this pack leaves to you
+
+This pack scores who earns a slot this week from a public signal. Building the company universe and verifying emails sit outside the pack.
+
+- [Build a company list](https://thegtmdirectory.com/jobs/build-a-company-list) — grow the account set that signals can attach to
+- [Verify an email](https://thegtmdirectory.com/jobs/verify-an-email) — confirm deliverable before any send
+
+A found address is not sendable until verify returns deliverable.
+
 ## What is a prospect list?
 
 The people a public signal puts on this week's list. A job title with no signal is not a prospect yet.
