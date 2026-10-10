@@ -67,6 +67,10 @@ The scorer refuses a title-only list. A title with no signal is the refusal. It 
 
 Do not invent a signal to get past the refusal. If you have no signal for a person, leave them off the list and tell the user.
 
+## Banned: found is not sendable
+
+A found email is not sendable until verify returns deliverable. Catch-all and unknown stay off the send list. This pack scores the slot; verification is a separate step.
+
 ## Checklist
 
 Copy this list and tick it in order.
