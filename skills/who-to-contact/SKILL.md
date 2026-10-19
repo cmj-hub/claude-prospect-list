@@ -2,7 +2,7 @@
 name: who-to-contact
 description: "Score who to contact this week from one public buying signal, and refuse a title-only list. Use when building or checking a B2B prospect list, lead list, or call sheet; when asked who to call, email, or prioritize this week; or when a list has job titles but no signal behind them. Not for deliverability, dedup, or hygiene of an existing send list (use cold-email's cold-email-list-quality)."
 argument-hint: "[person, company, or signal | score]"
-allowed-tools: Read Write Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/score.py:*)
+allowed-tools: Read Write(./gtm/**) Bash(python3 ${CLAUDE_SKILL_DIR}/scripts/score.py:*)
 models: ""
 ---
 
