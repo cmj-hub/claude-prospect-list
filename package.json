@@ -1,0 +1,37 @@
+{
+  "name": "@jmc-gtm/claude-prospect-list",
+  "version": "0.4.0",
+  "description": "Score who to contact this week from one public buying signal, and refuse a title-only list. Deterministic, stdlib-only Python scorer. No network, no send.",
+  "license": "MIT",
+  "author": "JMC Go-to-Market Systems",
+  "homepage": "https://github.com/cmj-hub/claude-prospect-list#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmj-hub/claude-prospect-list.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cmj-hub/claude-prospect-list/issues"
+  },
+  "keywords": [
+    "agent-skills",
+    "claude-code",
+    "claude-plugin",
+    "sales",
+    "prospecting",
+    "b2b",
+    "lead-list",
+    "gtm",
+    "buying-signal"
+  ],
+  "files": [
+    ".claude-plugin",
+    "skills",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
